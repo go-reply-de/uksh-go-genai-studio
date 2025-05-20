@@ -15,7 +15,7 @@ inputs = {
 
   git_push_config = {
     trigger_type = "branch"
-    value        = "^master$"
+    value        = "^main$"
   }
 
   user_group_mail = ["go-genai-studio-developers.group@goreply.de", "go-genai-studio-user@goreply.de"]
