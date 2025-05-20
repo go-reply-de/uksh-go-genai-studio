@@ -29,7 +29,7 @@ steps:
         echo "ERROR: _ENVIRONMENT is prod, but TAG_NAME is not set. Ensure this is a tag-triggered build for prod."
         exit 1
       fi
-      VERSION_STRING="${TAG_NAME}" # Assigning CB sub to Bash var
+      VERSION_STRING="v${TAG_NAME}" # Assigning CB sub to Bash var
       echo "Using Git Tag for version: $${VERSION_STRING}"
     else
       echo "Non-production environment (${_ENVIRONMENT}) detected."
