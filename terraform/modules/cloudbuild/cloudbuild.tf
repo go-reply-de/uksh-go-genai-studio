@@ -37,7 +37,7 @@ resource "google_cloudbuild_trigger" "repo-trigger" {
 }
 
 resource "google_service_account" "cloudbuild_service_account" {
-  account_id = "${var.application}-${var.environment}-build-sa"
+  account_id = "${var.application}-cloudbuild-sa"
 }
 
 resource "google_project_iam_member" "act_as" {

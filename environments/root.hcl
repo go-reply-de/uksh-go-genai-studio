@@ -1,22 +1,22 @@
 locals {
   # The length of application name, environment and gcp_project_id combined can at most be 46  characters long
-  application = "go-genai-studio"
+  application = "genai-portal"
 
   team_name       = "goreply"
-  repository      = "internal_internal-projects_go-genai-studio"
+  repository      = "uksh-go-genai-studio"
   prefix          = "go-de"
   domain          = "example.com"
-  sign_in_domains = ["customer.com"]
+  sign_in_domains = []
 
   # Extract the variables we need for easy access
   gcp_region     = "europe-west3"
-  gcp_project_id = "go-de-genai-studio"
+  gcp_project_id = "uksh-pub-dev-genai-portal"
 
   # Due to the setup of the environments directory it will match the corresponding environment
   environment = "${path_relative_to_include()}"
 
   # Configmap variables
-  application_name  = "Go GenAI Studio"
+  application_name  = "GenAI Portal"
   application_email = "go.de.genai.studio@reply.de"
   application_date  = formatdate("MMMM DD, YYYY", timestamp())
 }

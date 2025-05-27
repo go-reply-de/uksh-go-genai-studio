@@ -32,7 +32,7 @@ module "cloudbuild_v2_github" {
   installation_id     = 63043800
 
   repositories = {
-    github = "https://github.com/go-reply-de/go-genai-studio.git"
+    github = "https://github.com/go-reply-de/uksh-go-genai-studio.git"
   }
   git_provider = "github"
 }

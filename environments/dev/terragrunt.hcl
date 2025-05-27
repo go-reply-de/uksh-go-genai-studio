@@ -10,8 +10,8 @@ include {
 inputs = {
 
   node_env        = "development"
-  domain          = "dev.genai-studio.goreply.de"
-  sign_in_domains = ["goreply.de", "demo.goreply.de"]
+  domain          = "dev.genai-portal.uksh.de"
+  sign_in_domains = ["gcp.uksh.de"]
 
   git_push_config = {
     trigger_type = "branch"

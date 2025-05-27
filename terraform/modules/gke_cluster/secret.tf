@@ -1,5 +1,5 @@
 resource "google_service_account" "k8s_service_account" {
-  account_id = "${var.application}-${var.environment}-k8s-sa"
+  account_id = "${var.application}-vertex-access-sa"
 }
 
 resource "google_project_iam_member" "act_as" {
@@ -30,7 +30,7 @@ resource "google_service_account_key" "k8s_key" {
 }
 
 resource "google_secret_manager_secret" "k8s_key_private_key" {
-  secret_id = "${var.prefix}-${var.environment}-${var.application}-k8s_key_private_key"
+  secret_id = "${var.environment}-${var.application}-k8s_key_private_key"
 
   replication {
     user_managed {

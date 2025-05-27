@@ -13,7 +13,7 @@ fi
 echo "You entered: $filename"
 
 # Set variables in command line
-PROJECT_ID="go-de-genai-demo"  # GCP project ID
+PROJECT_ID="uksh-pub-dev-genai-portal"  # GCP project ID
 SERVICE_ACCOUNT_NAME=$filename  # Name of the service account
 KEY_FILE="$filename.json" # Name of the key to be created in the service account including the format
 
