@@ -15,6 +15,10 @@ resource "google_compute_subnetwork" "gke_cluster" {
   ipv6_access_type = "EXTERNAL"
 
   network = google_compute_network.gke_cluster.id
+
+  # Ensure private_ip_google_access is true for nodes to reach Google APIs without external IPs
+  private_ip_google_access = true
+  
   secondary_ip_range {
     range_name    = "services-range"
     ip_cidr_range = "192.168.0.0/24"
@@ -55,6 +59,16 @@ resource "google_container_cluster" "gke_cluster" {
 
   network    = google_compute_network.gke_cluster.id
   subnetwork = google_compute_subnetwork.gke_cluster.id
+
+  private_cluster_config {
+    enable_private_nodes    = true
+    enable_private_endpoint = false # Set to true if control plane should only have private IP.
+    master_ipv4_cidr_block  = "172.16.0.32/28"
+  }
+
+  workload_identity_config {
+    workload_pool = "${data.google_project.project.project_id}.svc.id.goog"
+  }
 
   ip_allocation_policy {
     stack_type                    = "IPV4_IPV6"

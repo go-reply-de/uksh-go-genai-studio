@@ -2,7 +2,7 @@ resource "google_storage_bucket" "go-genai-images-bucket" {
   name     = var.name
   location = var.location
 
-  uniform_bucket_level_access = false // Enable object-level ACLs
+  uniform_bucket_level_access = true
 }
 
 resource "google_storage_bucket_iam_member" "bucket_group_access" {
