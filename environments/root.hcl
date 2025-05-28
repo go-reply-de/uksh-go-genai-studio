@@ -10,10 +10,30 @@ locals {
 
   # Extract the variables we need for easy access
   gcp_region     = "europe-west3"
-  gcp_project_id = "uksh-pub-dev-genai-portal"
 
   # Due to the setup of the environments directory it will match the corresponding environment
-  environment = "${path_relative_to_include()}"
+  environment_full_path = path_relative_to_include() // e.g., "aw1/dev", "aw1/pub", "pub/dev", "pub/prod"
+  path_parts            = split("/", local.environment_full_path)
+  current_scope         = length(local.path_parts) == 2 ? local.path_parts[0] : "unknown_scope"
+  current_env_type      = length(local.path_parts) == 2 ? local.path_parts[1] : "unknown_env_type"
+  sanitized_environment_for_names = replace(local.environment_full_path, "/", "-") # e.g., "pub-dev"
+
+  project_id_map = {
+    "aw1" = {
+      "dev" = "uksh-aw1-dev-genai-portal"  // Corresponds to environments/aw1/dev/
+      "pub" = "uksh-aw1-prod-genai-portal" // Corresponds to environments/aw1/pub/
+    },
+    "pub" = {
+      "dev"  = "uksh-pub-dev-genai-portal"  // Corresponds to environments/pub/dev/
+      "prod" = "uksh-pub-prod-genai-portal" // Corresponds to environments/pub/prod/
+    }
+  }
+
+  gcp_project_id = lookup(
+    lookup(local.project_id_map, local.current_scope, {}),
+    local.current_env_type,
+    "ERROR-project-id-not-found-${local.current_scope}-${local.current_env_type}"
+  )
 
   # Configmap variables
   application_name  = "GenAI Portal"
@@ -32,7 +52,7 @@ remote_state {
     #  The foldername should match the actual environment.                #
     #######################################################################
 
-    bucket   = "terraform-state-${local.environment}-${local.application}-${local.gcp_project_id}"
+    bucket   = "terraform-state-${local.current_env_type}-${local.application}-${local.gcp_project_id}"
     prefix   = "terraform.tfstate"
     project  = "${local.gcp_project_id}"
     location = "${local.gcp_region}"
@@ -59,7 +79,7 @@ provider "google" {
   region = "${local.gcp_region}"
   default_labels = {
     application         = "${local.application}"
-    environment         = "${local.environment}"
+    environment         = "${local.current_env_type}"
     team_name           = "${local.team_name}"
     repository          = "${local.repository}"
   }
@@ -73,7 +93,7 @@ inputs = {
   gcp_project_id    = "${local.gcp_project_id}"
   gcp_region        = "${local.gcp_region}"
   prefix            = "${local.prefix}"
-  environment       = "${local.environment}"
+  environment       = "${local.current_env_type}"
   application       = "${local.application}"
   domain            = "${local.domain}"
   sign_in_domains   = "${local.sign_in_domains}"

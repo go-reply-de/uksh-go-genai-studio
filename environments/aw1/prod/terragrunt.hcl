@@ -1,5 +1,5 @@
 terraform {
-  source = "../..//terraform"
+  source = "../../..//terraform"
 }
 
 include {
@@ -10,15 +10,15 @@ include {
 inputs = {
 
   node_env        = "production"
-  domain          = "genai-studio.goreply.de"
-  sign_in_domains = ["goreply.de", "charite.goreply.de", "aenova.goreply.de"]
+  domain          = "genai-portal.uksh.de"
+  sign_in_domains = ["gcp.uksh.de"]
 
   git_push_config = {
     trigger_type = "tag"
     value        = "v*"
   }
 
-  user_group_mail = ["go-genai-studio-user@goreply.de"]
+  user_group_mail = ["goreply-admins@uksh.de", "goreply-editors@uksh.de"]
   
   # Cloud Armor configuration
   enable_cloud_armor = true
