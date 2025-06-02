@@ -20,7 +20,7 @@ resource "google_cloudbuild_trigger" "repo-trigger" {
   ]
   service_account = google_service_account.cloudbuild_service_account.id
   substitutions = {
-    _GKE_CLUSTER_NAME                      = google_clouddeploy_target.primary.target_id
+    _GKE_CLUSTER_NAME                      = var.cluster_id
     _REGISTRY_NAME                         = google_artifact_registry_repository.repo.name
     _DELIVERY_PIPELINE_NAME                = google_clouddeploy_delivery_pipeline.primary.name
     _GKE_NAMESPACE                         = "${var.application}-${var.environment}"
