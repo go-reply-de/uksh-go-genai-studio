@@ -1,11 +1,12 @@
 apiVersion: deploy.cloud.google.com/v1
 kind: DeliveryPipeline
 metadata:
-  name: go-genai-studio-###ENVIRONMENT###-pipeline
+  name: genai-portal-###ENVIRONMENT###-delivery-pipeline
   labels:
-    app: gogenaistudio###ENVIRONMENT###
-description: Go GenAI Studio ###ENVIRONMENT### Pipeline
+    app: genai-portal-###ENVIRONMENT###
+  annotations: {}
+description: GenAI Portal ###ENVIRONMENT### Delivery Pipeline
 serialPipeline:
   stages:
-  - targetId: deploy-to-genai-studio-cluster
+  - targetId: deploy-to-genai-portal-###ENVIRONMENT###
     profiles: []

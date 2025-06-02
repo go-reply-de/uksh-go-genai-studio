@@ -3,7 +3,8 @@ kind: Target
 metadata:
   name: deploy-to-genai-portal-###ENVIRONMENT###
   annotations: {}
-  labels: {}
+  labels:
+    app: genai-portal-###ENVIRONMENT### 
 description: Target for GenAI portal ###ENVIRONMENT###
 requireApproval: false
 executionConfigs:
