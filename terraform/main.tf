@@ -54,6 +54,7 @@ module "cloudbuild" {
   repository_id = module.cloudbuild_v2_github.repository_ids["github"]
 
   cluster_id                            = module.gke_cluster.cluster_id
+  cluster_name                          = module.gke_cluster.cluster_name
   k8s_secret_private_key_name           = module.gke_cluster.k8s_secret_private_key_name
   domain                                = var.domain
   librechat_credentials_env_keys        = module.gke_cluster.librechat_credentials_env_keys

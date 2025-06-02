@@ -16,6 +16,9 @@ variable "filename" {
 variable "cluster_id" {
   type = string
 }
+variable "cluster_name" {
+  type = string
+}
 variable "k8s_secret_private_key_name" {
   type = string
 }
