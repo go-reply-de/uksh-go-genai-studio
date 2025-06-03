@@ -100,4 +100,5 @@ inputs = {
   application_name  = "${local.application_name}"
   application_date  = "${local.application_date}"
   application_email = "${local.application_email}"
+  sanitized_env     = "${local.sanitized_environment_for_names}"
 }

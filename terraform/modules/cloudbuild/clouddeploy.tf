@@ -1,7 +1,7 @@
 resource "google_clouddeploy_target" "primary" {
   project  = data.google_project.project.id
   location = var.gcp_region
-  name     = "${var.application}-${var.environment}-clouddeploy-target"
+  name     = "${var.application}-${var.sanitized_env}-target"
 
   gke {
     cluster = var.cluster_id
@@ -22,7 +22,7 @@ resource "google_clouddeploy_target" "primary" {
 resource "google_clouddeploy_delivery_pipeline" "primary" {
   project  = data.google_project.project.id
   location = var.gcp_region
-  name     = "${var.application}-${var.environment}-delivery-pipeline"
+  name     = "${var.application}-${var.sanitized_env}-delivery-pipeline"
 
   serial_pipeline {
     stages {

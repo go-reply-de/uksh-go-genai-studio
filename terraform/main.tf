@@ -43,6 +43,7 @@ module "cloudbuild" {
   gcp_region  = var.gcp_region
   prefix      = var.prefix
   environment = var.environment
+  sanitized_env = var.sanitized_env
   node_env    = var.node_env
   application = var.application
   git_push_config = {

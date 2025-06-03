@@ -10,6 +10,9 @@ variable "prefix" {
 variable "environment" {
   type = string
 }
+variable "sanitized_env" {
+  type = string
+}
 
 variable "node_env" {
   type = string
